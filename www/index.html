@@ -3,45 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#1f4e3d">
-<title>Panel AxisPOS</title>
+<meta name="theme-color" content="#1c1917">
+<title>Admin POS</title>
+<link rel="icon" href="icono.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
 <section id="login" class="pantalla">
-  <form id="form-login" class="tarjeta" autocomplete="off">
-    <h1>Panel AxisPOS</h1>
-    <p class="sub">Inicia sesión con tu usuario de MariaDB</p>
+  <div class="login-caja">
+    <img src="icono.png" alt="" class="login-logo" width="84" height="84">
+    <h1>Admin POS</h1>
+    <p class="sub" id="login-sub">Entra con tu PIN</p>
+
     <label id="fila-servidor" hidden>Servidor (la PC)
-      <input id="servidor" inputmode="url" placeholder="http://192.168.1.10:3000">
+      <input id="servidor" inputmode="url" placeholder="http://192.168.1.10:3000" autocomplete="off">
     </label>
-    <label>Usuario <input id="usuario" autocapitalize="none" required></label>
-    <label>Contraseña <input id="clave" type="password"></label>
-    <details>
-      <summary>Opciones de conexión</summary>
-      <label>Servidor MariaDB <input id="host" value="127.0.0.1"></label>
-      <label>Puerto <input id="puerto" inputmode="numeric" value="3306"></label>
-      <label>Base de datos <input id="base" value="axispos_prueba"></label>
+
+    <form id="form-pin" class="tarjeta" autocomplete="off" hidden>
+      <label>Usuario <select id="usuario-pin"></select></label>
+      <label>PIN <input id="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" required></label>
+      <p id="error-pin" class="error" role="alert" hidden></p>
+      <button id="entrar-pin" type="submit" class="btn">Entrar</button>
+    </form>
+
+    <details id="det-db" class="tarjeta">
+      <summary id="sum-db">Entrar con usuario de MariaDB</summary>
+      <form id="form-db" autocomplete="off">
+        <p class="sub" id="ayuda-db">Se usa la primera vez (queda guardado en la PC) o si olvidaste tu PIN.</p>
+        <label>Usuario <input id="usuario" autocapitalize="none" required></label>
+        <label>Contraseña <input id="clave" type="password"></label>
+        <label>Servidor MariaDB <input id="host" value="127.0.0.1"></label>
+        <label>Puerto <input id="puerto" inputmode="numeric" value="3306"></label>
+        <label>Base de datos <input id="base" value="axispos_prueba"></label>
+        <p id="error-db" class="error" role="alert" hidden></p>
+        <button id="entrar-db" type="submit" class="btn">Conectar y entrar</button>
+      </form>
     </details>
-    <p id="error" class="error" role="alert" hidden></p>
-    <button id="entrar" type="submit">Entrar</button>
     <p id="ayuda-ip" class="sub" hidden></p>
-  </form>
+  </div>
 </section>
 
-<section id="app" class="pantalla" hidden>
-  <header>
-    <strong id="titulo">Resumen</strong>
-    <button id="salir" class="enlace">Salir</button>
-  </header>
-  <main id="contenido"></main>
-  <nav id="tabs">
-    <button data-tab="resumen" class="activa">Resumen</button>
-    <button data-tab="productos">Productos</button>
-    <button data-tab="existencias">Existencias</button>
-    <button data-tab="caja">Caja</button>
-  </nav>
+<section id="app" hidden>
+  <aside id="lateral">
+    <div class="marca">
+      <img src="icono.png" alt="" width="40" height="40">
+      <div><strong>Admin POS</strong><small id="rol-txt"></small></div>
+      <button id="salir-m" class="salir-m" aria-label="Salir">Salir</button>
+    </div>
+    <nav id="menu"></nav>
+    <div class="pie-lateral">
+      <span id="quien"></span>
+      <button id="salir" class="enlace">Salir</button>
+    </div>
+  </aside>
+  <div id="principal">
+    <header id="barra">
+      <span id="contexto"></span>
+      <div id="rangos" class="rangos" hidden></div>
+    </header>
+    <main id="contenido"></main>
+  </div>
 </section>
+
 <script src="app.js"></script>
 </body>
 </html>
