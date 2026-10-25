@@ -1,4 +1,4 @@
-name: Compilar app
+name: Compilar Admin POS
 
 on:
   push:
@@ -22,6 +22,10 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Crear proyecto Android
         run: npx cap add android
+      - name: Poner el ícono de Admin POS
+        run: |
+          find android/app/src/main/res -name 'ic_launcher*.webp' -delete
+          cp -r resources/android/. android/app/src/main/res/
       - name: Permitir conexión por WiFi local (http)
         run: sed -i 's/<application/<application android:usesCleartextTraffic="true"/' android/app/src/main/AndroidManifest.xml
       - name: Sincronizar
@@ -31,7 +35,7 @@ jobs:
         run: ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
-          name: Panel-AxisPOS-android
+          name: Admin-POS-android
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
   windows:
@@ -48,5 +52,5 @@ jobs:
         run: npx electron-builder --win portable --publish never
       - uses: actions/upload-artifact@v4
         with:
-          name: Panel-AxisPOS-windows
-          path: dist/Panel-AxisPOS.exe
+          name: Admin-POS-windows
+          path: dist/Admin-POS.exe
