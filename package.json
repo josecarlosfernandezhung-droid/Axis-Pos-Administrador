@@ -1,7 +1,7 @@
 {
-  "name": "panel-axispos",
+  "name": "admin-pos",
   "version": "1.0.0",
-  "description": "Panel AxisPOS: ventas, productos, existencias y caja desde MariaDB",
+  "description": "Admin POS: ventas, inventario, caja y control desde MariaDB",
   "main": "electron/main.cjs",
   "type": "module",
   "private": true,
@@ -21,9 +21,19 @@
     "electron-builder": "^25.1.8"
   },
   "build": {
-    "appId": "com.tototools.panelaxispos",
-    "productName": "Panel AxisPOS",
-    "files": ["electron/**", "server/**", "www/**", "package.json"],
-    "win": { "target": "portable", "artifactName": "Panel-AxisPOS.exe" }
+    "appId": "com.tototools.adminpos",
+    "productName": "Admin POS",
+    "files": [
+      "electron/**",
+      "server/**",
+      "www/**",
+      "build/icon.png",
+      "package.json"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "build/icon.ico",
+      "artifactName": "Admin-POS.exe"
+    }
   }
 }

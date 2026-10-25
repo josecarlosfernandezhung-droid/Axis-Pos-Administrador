@@ -1,6 +1,9 @@
 {
-  "appId": "com.tototools.panelaxispos",
-  "appName": "Panel AxisPOS",
+  "appId": "com.tototools.adminpos",
+  "appName": "Admin POS",
   "webDir": "www",
-  "server": { "androidScheme": "http", "cleartext": true }
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true
+  }
 }
