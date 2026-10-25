@@ -1,0 +1,29 @@
+{
+  "name": "panel-axispos",
+  "version": "1.0.0",
+  "description": "Panel AxisPOS: ventas, productos, existencias y caja desde MariaDB",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "servidor": "node server/start.mjs",
+    "pc": "electron .",
+    "pc:exe": "electron-builder --win portable --publish never"
+  },
+  "dependencies": {
+    "mysql2": "^3.11.3"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.tototools.panelaxispos",
+    "productName": "Panel AxisPOS",
+    "files": ["electron/**", "server/**", "www/**", "package.json"],
+    "win": { "target": "portable", "artifactName": "Panel-AxisPOS.exe" }
+  }
+}
