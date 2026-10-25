@@ -5,6 +5,8 @@ const { pathToFileURL } = require("node:url");
 if (!app.requestSingleInstanceLock()) app.quit();
 
 async function crearVentana() {
+  // Aquí se guardan la conexión y los PIN (carpeta privada del usuario de Windows)
+  process.env.AX_DATA_DIR = app.getPath("userData");
   let puerto;
   try {
     const { iniciar } = await import(
@@ -13,7 +15,7 @@ async function crearVentana() {
     puerto = await iniciar(3000);
   } catch (e) {
     dialog.showErrorBox(
-      "Panel AxisPOS",
+      "Admin POS",
       e && e.code === "EADDRINUSE"
         ? "El puerto 3000 ya está en uso. Cierra otra copia del panel y vuelve a abrirlo."
         : String((e && e.message) || e)
@@ -25,7 +27,8 @@ async function crearVentana() {
     width: 1100,
     height: 760,
     autoHideMenuBar: true,
-    title: "Panel AxisPOS",
+    title: "Admin POS",
+    icon: path.join(__dirname, "..", "build", "icon.png"),
   });
   win.loadURL(`http://localhost:${puerto}`);
 }
